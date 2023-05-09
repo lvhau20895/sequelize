@@ -1,0 +1,40 @@
+1. Cấu trúc thư mục thành:
+- Model: các đối tượng <=> các table trong CSDL
+- View: giao diện
+- Controller: xử lý logic, chức năng
+- Router: kết nối các đối tượng url trong express
+
+2. Các hàm thao tác dữ liệu trong Sequelize
+- findAll(): lấy tất cả dữ liệu - trả về []
+- findByPk(id): lấy dữ liệu theo id - trả về {}
+- findOne(): lấy dữ liệu theo điều kiện - trả về {}
+- create(): thêm mới dữ liệu
+- update(): cập nhật dữ liệu theo điều kiện
+- destroy(): xóa dữ liệu theo điều kiện
+
+3. Code First
+- cài đặt thư viện sequelize-cli: yarn add sequelize-cli
+- chạy lệnh: yarn sequelize-cli init ôr npx sequelize-cli init - tạo ra 4 thư mục
+    config: file cấu hình,
+    migrations: file được tạo khi tạo model,
+    models: file được tạo khi tạo model,
+    seeders: file được tạo khi thêm dữ liệu
+- tạo model: yarn sequelize-cli model:generate --name Task --attributes task_name:string,isDone:boolean
+- tạo table trong CSDL: yarn sequelize-cli db:migrate
+- thêm dữ liệu: yarn sequelize-cli seed:generate --name demo-task => yarn sequelize-cli db:seed:all
+
+4. Database First
+- cài đặt thư viện sequelize-auto: yarn add sequelize-auto
+- lấy dữ liệu từ database về: yarn sequelize-auto -h localhost -d db_food -u root -x 20081995 -p 3307 --dialect mysql -o src/Models -l es6
+    -h: host
+    -d: database
+    -u: user
+    -x: password
+    -p: port
+    --dialect: CSDL
+    -o: đường dẫn lưu models
+    -l: generate phiên bản es5 or es6
+- 1 - 1: hasOne
+- 1 - N: hasMany
+- N - 1: belongsTo
+- N - N: belongsToMany
